@@ -1,10 +1,10 @@
 {
   "name": "markedit-api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Type definitions for the latest MakrEdit API.",
-  "license": "MIT",
   "main": "",
   "types": "markedit.d.ts",
+  "license": "MIT",
   "peerDependencies": {
     "@codemirror/commands": "^6.0.0",
     "@codemirror/language": "^6.0.0",

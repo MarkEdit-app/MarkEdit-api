@@ -8,14 +8,19 @@ import type * as lezerHighlight from '@lezer/highlight';
 import type * as lezerLr from '@lezer/lr';
 
 declare global {
-  var MarkEdit: {
+  const MarkEdit: {
     /**
-     * Text editing interfaces.
+     * CodeMirror EditorView instance of the current editor.
      */
-    editor: TextEditable;
+    editorView: cmView.EditorView;
 
     /**
-     * Register an extension to MarkEdit.
+     * Convenient text editing interfaces.
+     */
+    editorAPI: TextEditable;
+
+    /**
+     * Add an extension to MarkEdit.
      * @param extension CodeMirror extension.
      */
     addExtension: (extension: cmState.Extension) => void;
@@ -23,7 +28,7 @@ declare global {
     /**
      * CodeMirror modules used by MarkEdit.
      */
-    cm: {
+    codemirror: {
       /**
        * `@codemirror/view`
        */
