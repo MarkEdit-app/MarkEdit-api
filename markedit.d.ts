@@ -1,6 +1,11 @@
 import type * as cmView from '@codemirror/view';
 import type * as cmState from '@codemirror/state';
 import type * as cmLanguage from '@codemirror/language';
+import type * as cmSearch from '@codemirror/search';
+import type * as cmCommands from '@codemirror/commands';
+import type * as lezerCommon from '@lezer/common';
+import type * as lezerHighlight from '@lezer/highlight';
+import type * as lezerLr from '@lezer/lr';
 
 declare global {
   interface Window {
@@ -20,7 +25,32 @@ declare global {
        * `@codemirror/language`
        */
       language: typeof cmLanguage;
+      /**
+       * `@codemirror/commands`
+       */
+      commands: typeof cmCommands;
+      /**
+       * `@codemirror/search`
+       */
+      search: typeof cmSearch;
     };
+    /**
+     * Lezer modules used by MarkEdit.
+     */
+    lezer: {
+      /**
+       * `@lezer/common`
+       */
+      common: typeof lezerCommon;
+      /**
+       * `@lezer/highlight`
+       */
+      highlight: typeof lezerHighlight;
+      /**
+       * `@lezer/lr`
+       */
+      lr: typeof lezerLr;
+    },
     api: {
       /**
        * Text editing interfaces.
