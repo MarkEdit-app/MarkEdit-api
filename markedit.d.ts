@@ -8,7 +8,18 @@ import type * as lezerHighlight from '@lezer/highlight';
 import type * as lezerLr from '@lezer/lr';
 
 declare global {
-  interface Window {
+  var MarkEdit: {
+    /**
+     * Text editing interfaces.
+     */
+    editor: TextEditable;
+
+    /**
+     * Register an extension to MarkEdit.
+     * @param extension CodeMirror extension.
+     */
+    addExtension: (extension: cmState.Extension) => void;
+
     /**
      * CodeMirror modules used by MarkEdit.
      */
@@ -34,6 +45,7 @@ declare global {
        */
       search: typeof cmSearch;
     };
+
     /**
      * Lezer modules used by MarkEdit.
      */
@@ -51,17 +63,6 @@ declare global {
        */
       lr: typeof lezerLr;
     },
-    api: {
-      /**
-       * Text editing interfaces.
-       */
-      editor: TextEditable;
-      /**
-       * Register an extension to MarkEdit.
-       * @param extension CodeMirror extension.
-       */
-      addExtension: (extension: cmState.Extension) => void;
-    };
   }
 }
 
