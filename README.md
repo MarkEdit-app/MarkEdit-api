@@ -4,7 +4,7 @@ Type definitions for the latest [MarkEdit](https://markedit.app) API.
 
 ## References
 
-- [Customization Guide](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization)
+- [MarkEdit Customization Guide](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization)
 - [Example (Markdown Table Editor)](https://github.com/MarkEdit-app/MarkEdit-mte)
 
 ## Usage
@@ -19,6 +19,12 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
     "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.0.5"
   }
 }
+```
+
+Import types declarations with:
+
+```ts
+import type {} from 'markedit-api';
 ```
 
 There is a global object called `MarkEdit` that provides these interfaces:
@@ -38,21 +44,23 @@ interface MarkEdit {
 }
 ```
 
-Also, you can import and use CodeMirror dependencies like this:
+Also, you can import and use [CodeMirror](https://codemirror.net/) and [Lezer](https://lezer.codemirror.net/) dependencies like this:
 
 ```ts
 import { keymap } from '@codemirror/view';
 import { Prec } from '@codemirror/state';
-import { TextEditable } from 'markedit-api';
+import { Tag } from '@lezer/highlight';
 ```
 
 Build a [CodeMirror extension](https://codemirror.net/docs/extensions/) with these dependencies, and add it to MarkEdit with:
 
 ```ts
-MarkEdit.addExtension(extension);
+MarkEdit.addExtension(extension); // Can also add an array of extensions
 ```
 
-In your build configuration, mark CodeMirror dependencies as external:
+In your build configuration, mark CodeMirror (and Lezer) dependencies as `external`.
+
+Taking this [vite](https://vitejs.dev/) config as an example:
 
 ```ts
 import { defineConfig } from 'vite';
@@ -63,11 +71,12 @@ export default defineConfig({
       external: [
         '@codemirror/view',
         '@codemirror/state',
+        // ...
       ],
     },
     lib: {
       entry: 'main.ts',
-      formats: ['cjs'],
+      formats: ['cjs'], // CommonJS
     },
   },
 });
