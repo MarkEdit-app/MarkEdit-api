@@ -71,7 +71,7 @@ declare global {
   }
 }
 
-export interface TextEditable {
+declare interface TextEditable {
   /**
    * Get text of the document.
    * @param range The range of the text. If no range is provided, the entire document is returned.
@@ -125,7 +125,7 @@ export interface TextEditable {
   redo(): void;
 }
 
-export type TextRange = {
+declare type TextRange = {
   from: number;
   to: number;
 };
