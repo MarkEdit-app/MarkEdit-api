@@ -1,10 +1,15 @@
+import type { EditorView } from '@codemirror/view';
+import type { Extension } from '@codemirror/state';
+
 import type * as cmView from '@codemirror/view';
 import type * as cmState from '@codemirror/state';
 import type * as cmLanguage from '@codemirror/language';
-import type * as cmSearch from '@codemirror/search';
-import type * as cmCommands from '@codemirror/commands';
+import type * as cmLanguageData from '@codemirror/language-data';
+import type * as cmLangMarkdown from '@codemirror/lang-markdown';
+
 import type * as lezerCommon from '@lezer/common';
 import type * as lezerHighlight from '@lezer/highlight';
+import type * as lezerMarkdown from '@lezer/markdown';
 import type * as lezerLr from '@lezer/lr';
 
 declare global {
@@ -12,7 +17,7 @@ declare global {
     /**
      * CodeMirror EditorView instance of the current editor.
      */
-    editorView: cmView.EditorView;
+    editorView: EditorView;
 
     /**
      * Convenient text editing interfaces.
@@ -23,32 +28,32 @@ declare global {
      * Add an extension to MarkEdit.
      * @param extension CodeMirror extension.
      */
-    addExtension: (extension: cmState.Extension) => void;
+    addExtension: (extension: Extension) => void;
 
     /**
      * CodeMirror modules used by MarkEdit.
      */
     codemirror: {
       /**
-       * `@codemirror/view`
+       * The `@codemirror/view` module.
        */
       view: typeof cmView;
       /**
-       * `@codemirror/state`
+       * The `@codemirror/state` module.
        */
       state: typeof cmState;
       /**
-       * `@codemirror/language`
+       * The `@codemirror/language` module.
        */
       language: typeof cmLanguage;
       /**
-       * `@codemirror/commands`
+       * The `@codemirror/language-data` module.
        */
-      commands: typeof cmCommands;
+      languageData: typeof cmLanguageData;
       /**
-       * `@codemirror/search`
+       * The `@codemirror/lang-markdown` module.
        */
-      search: typeof cmSearch;
+      langMarkdown: typeof cmLangMarkdown;
     };
 
     /**
@@ -56,15 +61,19 @@ declare global {
      */
     lezer: {
       /**
-       * `@lezer/common`
+       * The `@lezer/common` module.
        */
       common: typeof lezerCommon;
       /**
-       * `@lezer/highlight`
+       * The `@lezer/highlight` module.
        */
       highlight: typeof lezerHighlight;
       /**
-       * `@lezer/lr`
+       * The `@lezer/markdown` module.
+       */
+      markdown: typeof lezerMarkdown;
+      /**
+       * The `@lezer/lr` module.
        */
       lr: typeof lezerLr;
     },

@@ -16,7 +16,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.0.5"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.0.6"
   }
 }
 ```
@@ -38,9 +38,9 @@ interface MarkEdit {
   // Add an extension to MarkEdit.
   addExtension: (extension: Extension) => void;
   // CodeMirror modules used by MarkEdit.
-  codemirror: { view, state, language, commands, search };
+  codemirror: { view, state, language, languageData, langMarkdown };
   // Lezer modules used by MarkEdit.
-  lezer: { common, highlight, lr },
+  lezer: { common, highlight, markdown, lr },
 }
 ```
 
