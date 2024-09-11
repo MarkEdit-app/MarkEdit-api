@@ -9,7 +9,7 @@ Type definitions for the latest [MarkEdit](https://markedit.app) API.
 
 ## Usage
 
-> The general workflow of making a MarkEdit script, which leverages [CodeMirror extensions](https://codemirror.net/docs/extensions/) to change the behavior of the app.
+> The general workflow for creating a MarkEdit script involves leveraging [CodeMirror extensions](https://codemirror.net/docs/extensions/) to modify the app's behavior.
 
 Add `markedit-api` to your (TypeScript) project's devDependencies:
 
@@ -58,9 +58,11 @@ Build a [CodeMirror extension](https://codemirror.net/docs/extensions/) with the
 MarkEdit.addExtension(extension); // Can also add an array of extensions
 ```
 
-In your build configuration, mark CodeMirror (and Lezer) dependencies as `external`.
+## Building
 
-Taking this [vite](https://vitejs.dev/) config as an example:
+In your build configuration, mark used CodeMirror (and Lezer) dependencies as `external`.
+
+Here is an example of [vite](https://vitejs.dev/) config:
 
 ```ts
 import { defineConfig } from 'vite';
@@ -82,7 +84,28 @@ export default defineConfig({
 });
 ```
 
-Build the project as a `CommonJS` library, copy it to `~/Library/Containers/app.cyan.markedit/Data/Documents/scripts/`, and restart the app.
+It is recommended to build as [cjs](https://commonjs.org/), building as [umd](https://github.com/umdjs/umd) should work too. If you build it as an [iife](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), make sure to replace imports as globals like this:
+
+```
+rollupOptions: {
+  external: [
+    '@codemirror/view',
+    '@codemirror/state',
+  ],
+  output: {
+    globals: {
+      '@codemirror/view': 'MarkEdit.codemirror.view',
+      '@codemirror/state': 'MarkEdit.codemirror.state',
+    },
+  },
+},
+```
+
+The reason is to ensure that user scripts and MarkEdit use the same modules, rather than being separately bundled from different projects.
+
+The final step is to copy the built script to `~/Library/Containers/app.cyan.markedit/Data/Documents/scripts/`, and restart the app.
+
+## Using JavaScript
 
 If you just want to quickly prototype with JavaScript, you can directly access CodeMirror and MarkEdit interfaces through objects assigned to the `MarkEdit` object. For example:
 
@@ -90,5 +113,7 @@ If you just want to quickly prototype with JavaScript, you can directly access C
 const keymap = MarkEdit.codemirror.view.keymap;
 const editorAPI = MarkEdit.editorAPI;
 ```
+
+----
 
 For a complete example, refer to [Example (Markdown Table Editor)](https://github.com/MarkEdit-app/MarkEdit-mte).
