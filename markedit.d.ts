@@ -4,12 +4,9 @@ import type { Extension } from '@codemirror/state';
 import type * as cmView from '@codemirror/view';
 import type * as cmState from '@codemirror/state';
 import type * as cmLanguage from '@codemirror/language';
-import type * as cmLanguageData from '@codemirror/language-data';
-import type * as cmLangMarkdown from '@codemirror/lang-markdown';
 
 import type * as lezerCommon from '@lezer/common';
 import type * as lezerHighlight from '@lezer/highlight';
-import type * as lezerMarkdown from '@lezer/markdown';
 import type * as lezerLr from '@lezer/lr';
 
 declare global {
@@ -46,14 +43,6 @@ declare global {
        * The `@codemirror/language` module.
        */
       language: typeof cmLanguage;
-      /**
-       * The `@codemirror/language-data` module.
-       */
-      languageData: typeof cmLanguageData;
-      /**
-       * The `@codemirror/lang-markdown` module.
-       */
-      langMarkdown: typeof cmLangMarkdown;
     };
 
     /**
@@ -68,10 +57,6 @@ declare global {
        * The `@lezer/highlight` module.
        */
       highlight: typeof lezerHighlight;
-      /**
-       * The `@lezer/markdown` module.
-       */
-      markdown: typeof lezerMarkdown;
       /**
        * The `@lezer/lr` module.
        */

@@ -1,19 +1,16 @@
 {
   "name": "markedit-api",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Type definitions for the latest MakrEdit API.",
   "main": "",
   "types": "markedit.d.ts",
   "license": "MIT",
   "peerDependencies": {
-    "@codemirror/lang-markdown": "^6.0.0",
     "@codemirror/language": "^6.0.0",
-    "@codemirror/language-data": "^6.0.0",
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
     "@lezer/common": "^1.0.0",
     "@lezer/highlight": "^1.0.0",
-    "@lezer/lr": "^1.0.0",
-    "@lezer/markdown": "^1.0.0"
+    "@lezer/lr": "^1.0.0"
   }
 }
