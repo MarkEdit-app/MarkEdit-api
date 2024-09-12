@@ -16,7 +16,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.0.8"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.1.0"
   }
 }
 ```
@@ -60,7 +60,7 @@ MarkEdit.addExtension(extension); // Can also add an array of extensions
 
 ## Building
 
-In your build configuration, mark used CodeMirror (and Lezer) dependencies as `external`.
+In your build configuration, mark used MarkEdit and CodeMirror dependencies as `external`.
 
 Here is an example of [vite](https://vitejs.dev/) config:
 
@@ -71,6 +71,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [
+        'markedit-api',
         '@codemirror/view',
         '@codemirror/state',
         // ...
@@ -89,11 +90,13 @@ It is recommended to build as [cjs](https://commonjs.org/), building as [umd](ht
 ```
 rollupOptions: {
   external: [
+    'markedit-api',
     '@codemirror/view',
     '@codemirror/state',
   ],
   output: {
     globals: {
+      'markedit-api': 'MarkEdit',
       '@codemirror/view': 'MarkEdit.codemirror.view',
       '@codemirror/state': 'MarkEdit.codemirror.state',
     },
