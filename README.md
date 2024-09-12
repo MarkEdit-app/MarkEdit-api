@@ -16,7 +16,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.0.7"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.0.8"
   }
 }
 ```
@@ -24,10 +24,10 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 Import types declarations with:
 
 ```ts
-import type {} from 'markedit-api';
+import { MarkEdit } from 'markedit-api';
 ```
 
-There is a global object called `MarkEdit` that provides these interfaces:
+The `MarkEdit` object provides these interfaces:
 
 ```ts
 interface MarkEdit {

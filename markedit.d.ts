@@ -123,3 +123,5 @@ declare type TextRange = {
   from: number;
   to: number;
 };
+
+export { MarkEdit, TextEditable, TextRange };
