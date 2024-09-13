@@ -4,6 +4,8 @@ import type { Extension } from '@codemirror/state';
 import type * as cmView from '@codemirror/view';
 import type * as cmState from '@codemirror/state';
 import type * as cmLanguage from '@codemirror/language';
+import type * as cmCommands from '@codemirror/commands';
+import type * as cmSearch from '@codemirror/search';
 
 import type * as lezerCommon from '@lezer/common';
 import type * as lezerHighlight from '@lezer/highlight';
@@ -40,6 +42,16 @@ export interface MarkEdit {
      * The `@codemirror/language` module.
      */
     language: typeof cmLanguage;
+
+    /**
+     * The `@codemirror/commands` module.
+     */
+    commands: typeof cmCommands;
+
+    /**
+     * The `@codemirror/search` module.
+     */
+    search: typeof cmSearch;
   };
 
   /**
