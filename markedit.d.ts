@@ -1,5 +1,6 @@
 import type { EditorView } from '@codemirror/view';
 import type { Extension } from '@codemirror/state';
+import type { MarkdownConfig } from '@lezer/markdown';
 
 import type * as cmView from '@codemirror/view';
 import type * as cmState from '@codemirror/state';
@@ -9,6 +10,7 @@ import type * as cmSearch from '@codemirror/search';
 
 import type * as lezerCommon from '@lezer/common';
 import type * as lezerHighlight from '@lezer/highlight';
+import type * as lezerMarkdown from '@lezer/markdown';
 import type * as lezerLr from '@lezer/lr';
 
 export const MarkEdit: MarkEdit;
@@ -69,6 +71,11 @@ export interface MarkEdit {
     highlight: typeof lezerHighlight;
 
     /**
+     * The `@lezer/markdown` module.
+     */
+    markdown: typeof lezerMarkdown;
+
+    /**
      * The `@lezer/lr` module.
      */
     lr: typeof lezerLr;
@@ -79,6 +86,12 @@ export interface MarkEdit {
    * @param extension CodeMirror extension.
    */
   addExtension: (extension: Extension) => void;
+
+  /**
+   * Add a Markdown config to MarkEdit.
+   * @param config Markdown config.
+   */
+  addMarkdownConfig: (config: MarkdownConfig) => void;
 }
 
 export interface TextEditable {
