@@ -79,7 +79,13 @@ export interface MarkEdit {
      * The `@lezer/lr` module.
      */
     lr: typeof lezerLr;
-  },
+  };
+
+  /**
+   * Get notified when the editor is initialized.
+   * @param listener The callback function with the initialized editor instance.
+   */
+  onEditorReady: (listener: (editorView: EditorView) => void) => void;
 
   /**
    * Add an extension to MarkEdit.

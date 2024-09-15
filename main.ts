@@ -1,1 +1,1 @@
-export const MarkEdit = {};
+export const MarkEdit = { /* stub */ };
