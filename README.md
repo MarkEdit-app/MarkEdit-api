@@ -5,8 +5,9 @@ Type definitions for the latest [MarkEdit](https://markedit.app) API.
 ## References
 
 - [MarkEdit Customization Guide](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization)
-- [Example (Markdown Table Editor)](https://github.com/MarkEdit-app/MarkEdit-mte)
-- [Example (Text Highlight)](https://github.com/MarkEdit-app/MarkEdit-highlight)
+- [Example: Markdown Table Editor](https://github.com/MarkEdit-app/MarkEdit-mte)
+- [Example: Text Highlight](https://github.com/MarkEdit-app/MarkEdit-highlight)
+- [Example: Vue Language Package](https://github.com/MarkEdit-app/MarkEdit-lang-vue)
 
 ## Usage
 
@@ -107,6 +108,8 @@ export default defineConfig({
 });
 ```
 
+> Note: If you're using packages that are **not** supported in MarkEdit, such as leveraging [@codemirror/lang-vue](https://github.com/codemirror/lang-vue) to add syntax highlighting for Vue, they should **not** be marked as external.
+
 It is recommended to build as [cjs](https://commonjs.org/), building as [umd](https://github.com/umdjs/umd) should work too. If you build it as an [iife](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), make sure to replace imports as globals like this:
 
 ```
@@ -130,6 +133,8 @@ The reason is to ensure that user scripts and MarkEdit use the same modules, rat
 
 The final step is to copy the built script to `~/Library/Containers/app.cyan.markedit/Data/Documents/scripts/`, and restart the app.
 
+> Ensure the build system produces a single JavaScript file. If the build generates multiple chunks, you can use [vite-plugin-singlefile](https://github.com/richardtallent/vite-plugin-singlefile) to bundle everything into one file.
+
 ## Using JavaScript
 
 If you just want to quickly prototype with JavaScript, you can directly access CodeMirror and MarkEdit interfaces through objects assigned to the `MarkEdit` object. For example:
@@ -141,4 +146,4 @@ const editorAPI = MarkEdit.editorAPI;
 
 ----
 
-For complete examples, refer to [Example (Markdown Table Editor)](https://github.com/MarkEdit-app/MarkEdit-mte) and [Example (Text Highlight)](https://github.com/MarkEdit-app/MarkEdit-highlight).
+For complete examples, refer to [Example: Markdown Table Editor](https://github.com/MarkEdit-app/MarkEdit-mte), [Example: Text Highlight](https://github.com/MarkEdit-app/MarkEdit-highlight) and [Example: Vue Language Package](https://github.com/MarkEdit-app/MarkEdit-lang-vue).

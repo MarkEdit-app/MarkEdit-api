@@ -2,8 +2,9 @@
  * https://github.com/MarkEdit-app/MarkEdit-api
  *
  * - [MarkEdit Customization Guide](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization)
- * - [Example (Markdown Table Editor)](https://github.com/MarkEdit-app/MarkEdit-mte)
- * - [Example (Text Highlight)](https://github.com/MarkEdit-app/MarkEdit-highlight)
+ * - [Example: Markdown Table Editor](https://github.com/MarkEdit-app/MarkEdit-mte)
+ * - [Example: Text Highlight](https://github.com/MarkEdit-app/MarkEdit-highlight)
+ * - [Example: Vue Language Package](https://github.com/MarkEdit-app/MarkEdit-lang-vue)
  */
 
 import type { EditorView } from '@codemirror/view';
