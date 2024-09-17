@@ -1,5 +1,14 @@
+/**
+ * https://github.com/MarkEdit-app/MarkEdit-api
+ *
+ * - [MarkEdit Customization Guide](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization)
+ * - [Example (Markdown Table Editor)](https://github.com/MarkEdit-app/MarkEdit-mte)
+ * - [Example (Text Highlight)](https://github.com/MarkEdit-app/MarkEdit-highlight)
+ */
+
 import type { EditorView } from '@codemirror/view';
 import type { Extension } from '@codemirror/state';
+import type { LanguageDescription } from '@codemirror/language';
 import type { MarkdownConfig } from '@lezer/markdown';
 
 import type * as cmView from '@codemirror/view';
@@ -98,8 +107,17 @@ export interface MarkEdit {
    * @param config Markdown config.
    */
   addMarkdownConfig: (config: MarkdownConfig) => void;
+
+  /**
+   * Add a language to be highlighted (in code blocks) to MarkEdit.
+   * @param language The language description.
+   */
+  addCodeLanguage: (language: LanguageDescription) => void;
 }
 
+/**
+ * Abstract editor to provide convenient text editing interfaces.
+ */
 export interface TextEditable {
   /**
    * Get text of the document.

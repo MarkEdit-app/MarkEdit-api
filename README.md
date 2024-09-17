@@ -17,7 +17,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.4.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.5.0"
   }
 }
 ```
@@ -46,6 +46,8 @@ interface MarkEdit {
   addExtension: (extension: Extension) => void;
   // Add a Markdown config to MarkEdit.
   addMarkdownConfig: (config: MarkdownConfig) => void;
+  // Add a language to be highlighted (in code blocks) to MarkEdit.
+  addCodeLanguage: (language: LanguageDescription) => void;
 }
 ```
 
@@ -68,6 +70,12 @@ Build [MarkdownConfig](https://github.com/lezer-parser/markdown?tab=readme-ov-fi
 
 ```ts
 MarkEdit.addMarkdownConfig(config);
+```
+
+MarkEdit supports syntax highlighting for code blocks, you can also build your own [Language Package](https://codemirror.net/examples/lang-package/), and add it to MarkEdit with:
+
+```ts
+MarkEdit.addCodeLanguage(language);
 ```
 
 > While extensions and configs can theoretically be added at any time, it is recommended that they be added immediately after loading the script.
