@@ -23,7 +23,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 }
 ```
 
-Import types declarations with:
+Import type declarations with:
 
 ```ts
 import { MarkEdit } from 'markedit-api';
