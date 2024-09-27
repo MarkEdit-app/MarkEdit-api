@@ -1,6 +1,6 @@
 # MarkEdit-api
 
-Type definitions for the latest [MarkEdit](https://markedit.app) API.
+Type definitions for the latest [MarkEdit](https://github.com/MarkEdit-app/MarkEdit) API.
 
 ## References
 
