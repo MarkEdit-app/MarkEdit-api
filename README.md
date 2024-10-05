@@ -18,7 +18,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.5.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.6.0"
   }
 }
 ```
@@ -42,13 +42,21 @@ interface MarkEdit {
   // Lezer modules used by MarkEdit.
   lezer: { common, highlight, markdown, lr };
   // Get notified when the editor is initialized.
-  onEditorReady: (listener: (editorView: EditorView) => void) => void;
+  onEditorReady(listener: (editorView: EditorView) => void): void;
   // Add an extension to MarkEdit.
-  addExtension: (extension: Extension) => void;
+  addExtension(extension: Extension): void;
   // Add a Markdown config to MarkEdit.
-  addMarkdownConfig: (config: MarkdownConfig) => void;
+  addMarkdownConfig(config: MarkdownConfig): void;
   // Add a language to be highlighted (in code blocks) to MarkEdit.
-  addCodeLanguage: (language: LanguageDescription) => void;
+  addCodeLanguage(language: LanguageDescription): void;
+  // Add a menu item to the status bar.
+  addMainMenuItem(item: MenuItem | MenuItem[]): void;
+  // Present a contextual menu to receive user input.
+  showContextMenu(items: MenuItem[], location?: Point): void;
+  // Present an alert to receive user input.
+  showAlert(alert: Alert): Promise<number>;
+  // Present a text box to receive user input.
+  showTextBox(textBox?: TextBox): Promise<string | undefined>;
 }
 ```
 
@@ -80,6 +88,14 @@ MarkEdit.addCodeLanguage(language);
 ```
 
 > While extensions and configs can theoretically be added at any time, it is recommended that they be added immediately after loading the script.
+
+## Handling User Input
+
+While you can certainly build user interfaces with JavaScript and CSS, leveraging native UI components might be a better option.
+
+To create UI entries for your features, you can use the [addMainMenuItem](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+addMainMenuItem&type=code) function, which adds an item to the "Extensions" submenu of the main menu, with keyboard shortcuts support.
+
+To request user input, try using [showContextMenu](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+showContextMenu&type=code), [showAlert](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+showAlert&type=code), and [showTextBox](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+showTextBox&type=code).
 
 ## Building
 
@@ -147,3 +163,5 @@ const editorAPI = MarkEdit.editorAPI;
 ----
 
 For complete examples, refer to [Example: Markdown Table Editor](https://github.com/MarkEdit-app/MarkEdit-mte), [Example: Text Highlight](https://github.com/MarkEdit-app/MarkEdit-highlight) and [Example: Vue Language Package](https://github.com/MarkEdit-app/MarkEdit-lang-vue).
+
+Also, [markedit.d.ts](./markedit.d.ts) is fully typed and documented, use it as the API reference.
