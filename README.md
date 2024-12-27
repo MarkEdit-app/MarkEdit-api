@@ -149,7 +149,10 @@ The reason is to ensure that user scripts and MarkEdit use the same modules, rat
 
 The final step is to copy the built script to `~/Library/Containers/app.cyan.markedit/Data/Documents/scripts/`, and restart the app.
 
-> Ensure the build system produces a single JavaScript file. If the build generates multiple chunks, you can use [vite-plugin-singlefile](https://github.com/richardtallent/vite-plugin-singlefile) to bundle everything into one file.
+Ensure the build system produces a single JavaScript file. If the build generates multiple chunks, you can use [vite-plugin-singlefile](https://github.com/richardtallent/vite-plugin-singlefile) to bundle everything into one file.
+
+> [!TIP]
+> You can also use [MarkEdit-vite](https://github.com/MarkEdit-app/MarkEdit-vite) to simplify the workflow.
 
 ## Using JavaScript
 
