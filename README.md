@@ -5,6 +5,7 @@ Type definitions for the latest [MarkEdit](https://github.com/MarkEdit-app/MarkE
 ## References
 
 - [MarkEdit Customization Guide](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization)
+- [List of Extensions](https://github.com/MarkEdit-app/MarkEdit/wiki/Extensions)
 - [Example: Markdown Table Editor](https://github.com/MarkEdit-app/MarkEdit-mte)
 - [Example: Text Highlight](https://github.com/MarkEdit-app/MarkEdit-highlight)
 - [Example: Vue Language Package](https://github.com/MarkEdit-app/MarkEdit-lang-vue)
