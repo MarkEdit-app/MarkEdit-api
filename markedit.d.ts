@@ -98,6 +98,12 @@ export interface MarkEdit {
   onEditorReady(listener: (editorView: EditorView) => void): void;
 
   /**
+   * Get information of the current file.
+   * @returns The file information, or undefined for unsaved new drafts.
+   */
+  getFileInfo(): Promise<FileInfo | undefined>;
+
+  /**
    * Add an extension to MarkEdit.
    * @param extension CodeMirror extension.
    */
@@ -209,6 +215,16 @@ export interface TextEditable {
    */
   redo(): void;
 }
+
+/**
+ * Information of a file in the file system.
+ */
+export type FileInfo = {
+  filePath: string;
+  fileSize: number;
+  creationDate: Date;
+  modificationDate: Date;
+};
 
 /**
  * Represents a portion of text.

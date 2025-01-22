@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.6.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.7.0"
   }
 }
 ```
@@ -44,6 +44,8 @@ interface MarkEdit {
   lezer: { common, highlight, markdown, lr };
   // Get notified when the editor is initialized.
   onEditorReady(listener: (editorView: EditorView) => void): void;
+  // Get information of the current file.
+  getFileInfo(): Promise<FileInfo | undefined>;
   // Add an extension to MarkEdit.
   addExtension(extension: Extension): void;
   // Add a Markdown config to MarkEdit.
