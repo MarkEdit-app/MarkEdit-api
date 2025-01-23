@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.7.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.8.0"
   }
 }
 ```
@@ -46,6 +46,10 @@ interface MarkEdit {
   onEditorReady(listener: (editorView: EditorView) => void): void;
   // Get information of the current file.
   getFileInfo(): Promise<FileInfo | undefined>;
+  // Get all items from the native pasteboard.
+  getPasteboardItems(): Promise<PasteboardItem[]>;
+  // Get the string from the native pasteboard.
+  getPasteboardString(): Promise<string | undefined>;
   // Add an extension to MarkEdit.
   addExtension(extension: Extension): void;
   // Add a Markdown config to MarkEdit.

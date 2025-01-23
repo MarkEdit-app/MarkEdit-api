@@ -104,6 +104,18 @@ export interface MarkEdit {
   getFileInfo(): Promise<FileInfo | undefined>;
 
   /**
+   * Get all items from the native pasteboard.
+   * @returns The items from the native (general) pasteboard.
+   */
+  getPasteboardItems(): Promise<PasteboardItem[]>;
+
+  /**
+   * Get the string from the native pasteboard.
+   * @returns The string from the native (general) pasteboard, if applicable.
+   */
+  getPasteboardString(): Promise<string | undefined>;
+
+  /**
    * Add an extension to MarkEdit.
    * @param extension CodeMirror extension.
    */
@@ -224,6 +236,26 @@ export type FileInfo = {
   fileSize: number;
   creationDate: Date;
   modificationDate: Date;
+};
+
+/**
+ * Represents a native pasteboard item.
+ */
+export type PasteboardItem = {
+  /**
+   * Type name, such as `public.utf8-plain-text`.
+   */
+  type: string;
+
+  /**
+   * Base64 representation of the pasteboard data.
+   */
+  data: string;
+
+  /**
+   * String representation of the pasteboard data, if applicable.
+   */
+  string?: string;
 };
 
 /**
