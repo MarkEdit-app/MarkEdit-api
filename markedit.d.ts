@@ -272,6 +272,7 @@ export type TextRange = {
 export type MenuItem = {
   title?: string;
   action?: () => void;
+  state?: () => MenuItemState;
 
   /**
    * Whether an item is a separator used to logically group other items.
@@ -296,6 +297,20 @@ export type MenuItem = {
    * Child items to build a submenu.
    */
   children?: MenuItem[];
+};
+
+/**
+ * Represents the state of a menu item.
+ */
+export type MenuItemState = {
+  /**
+   * Whether enabled; defaults to true.
+   */
+  isEnabled?: boolean;
+  /**
+   * Whether selected; defaults to false.
+   */
+  isSelected?: boolean;
 };
 
 /**
