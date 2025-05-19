@@ -23,7 +23,7 @@ import type * as lezerHighlight from '@lezer/highlight';
 import type * as lezerMarkdown from '@lezer/markdown';
 import type * as lezerLr from '@lezer/lr';
 
-export const MarkEdit: MarkEdit;
+export const MarkEdit: Readonly<MarkEdit>;
 
 export interface MarkEdit {
   /**
