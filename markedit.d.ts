@@ -27,6 +27,11 @@ export const MarkEdit: Readonly<MarkEdit>;
 
 export interface MarkEdit {
   /**
+   * Configuration of the current editor.
+   */
+  editorConfig: Record<string, unknown>;
+
+  /**
    * CodeMirror EditorView instance of the current editor.
    */
   editorView: EditorView;
