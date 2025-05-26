@@ -164,6 +164,13 @@ export interface MarkEdit {
    * @returns The input string, or undefined if no value is provided.
    */
   showTextBox(textBox?: TextBox): Promise<string | undefined>;
+
+  /**
+   * Present a save panel for saving the file.
+   * @param options The panel information, including the data and optionally a default file name.
+   * @returns True if the file was successfully saved.
+   */
+  showSavePanel(options: SavePanelOptions): Promise<boolean>;
 }
 
 /**
@@ -358,3 +365,23 @@ export type TextBox = {
   placeholder?: string;
   defaultValue?: string;
 } | string;
+
+/**
+ * Represents options to show the save panel.
+ */
+export type SavePanelOptions = {
+  /**
+   * String representation of the file, if applicable.
+   */
+  string?: string;
+
+  /**
+   * Base64 representation of the file, if applicable.
+   */
+  data?: string;
+
+  /**
+   * Default file name.
+   */
+  fileName?: string;
+};

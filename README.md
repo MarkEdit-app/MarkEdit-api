@@ -64,6 +64,8 @@ interface MarkEdit {
   showAlert(alert: Alert): Promise<number>;
   // Present a text box to receive user input.
   showTextBox(textBox?: TextBox): Promise<string | undefined>;
+  // Present a save panel for saving the file.
+  showSavePanel(options: SavePanelOptions): Promise<number>;
 }
 ```
 
