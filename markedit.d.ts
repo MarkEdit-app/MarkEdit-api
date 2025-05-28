@@ -32,6 +32,13 @@ export interface MarkEdit {
   editorConfig: Record<string, unknown>;
 
   /**
+   * User-defined settings loaded from the [settings.json](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#advanced-settings) file.
+   *
+   * For example, user-defined scripts can use this to provide additional configurations.
+   */
+  userSettings: JSONObject;
+
+  /**
    * CodeMirror EditorView instance of the current editor.
    */
   editorView: EditorView;
@@ -384,4 +391,22 @@ export type SavePanelOptions = {
    * Default file name.
    */
   fileName?: string;
+};
+
+/**
+ * Typed JSON value.
+ */
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JSONObject
+  | JSONValue[];
+
+/**
+ * Typed JSON Object.
+ */
+type JSONObject = {
+  [key: string]: JSONValue;
 };

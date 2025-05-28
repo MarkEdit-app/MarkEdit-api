@@ -34,6 +34,10 @@ The `MarkEdit` object provides these interfaces:
 
 ```ts
 interface MarkEdit {
+  // Configuration of the current editor.
+  editorConfig: Record<string, unknown>;
+  // User-defined settings loaded from the settings.json file.
+  userSettings: JSONObject;
   // CodeMirror EditorView instance of the current editor.
   editorView: EditorView;
   // Convenient text editing interfaces.
