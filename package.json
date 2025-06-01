@@ -1,6 +1,6 @@
 {
   "name": "markedit-api",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Type definitions for the latest MakrEdit API.",
   "main": "main.ts",
   "types": "markedit.d.ts",
