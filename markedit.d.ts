@@ -294,6 +294,13 @@ export type MenuItem = {
   state?: () => MenuItemState;
 
   /**
+   * Icon for the item.
+   *
+   * This can be either a base64 string or a SF Symbol name.
+   */
+  icon?: string;
+
+  /**
    * Whether an item is a separator used to logically group other items.
    */
   separator?: boolean;
