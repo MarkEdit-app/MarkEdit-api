@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.10.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.11.0"
   }
 }
 ```
@@ -180,4 +180,4 @@ const editorAPI = MarkEdit.editorAPI;
 
 For complete examples, refer to [Example: Markdown Table Editor](https://github.com/MarkEdit-app/MarkEdit-mte), [Example: Text Highlight](https://github.com/MarkEdit-app/MarkEdit-highlight) and [Example: Vue Language Package](https://github.com/MarkEdit-app/MarkEdit-lang-vue).
 
-Also, [markedit.d.ts](./markedit.d.ts) is fully typed and documented, use it as the API reference.
+Also, [index.d.ts](./index.d.ts) is fully typed and documented, use it as the API reference.
