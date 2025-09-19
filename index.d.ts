@@ -49,6 +49,11 @@ export interface MarkEdit {
   editorAPI: TextEditable;
 
   /**
+   * Retrieves a generative language model by name.
+   */
+  languageModel(name: LanguageModelName): LanguageModel | undefined;
+
+  /**
    * CodeMirror modules used by MarkEdit.
    */
   codemirror: {
@@ -246,6 +251,85 @@ export interface TextEditable {
    */
   redo(): void;
 }
+
+/**
+ * Unique identifier of a generative language model.
+ *
+ * The only supported model at this time is [Apple's Foundation Models](https://developer.apple.com/documentation/foundationmodels).
+ */
+export type LanguageModelName = 'Apple-Foundation-Models';
+
+/**
+ * Response of a language model content generation.
+ *
+ * For non-streaming scenarios, `done` is always true.
+ */
+export type LanguageModelResponse = {
+  content?: string;
+  error?: string;
+  done: boolean;
+};
+
+/**
+ * Response notifier for language model streaming responses.
+ */
+export type LanguageModelStream = (response: LanguageModelResponse) => void;
+
+/**
+ * Interfaces for a generative language model.
+ */
+export interface LanguageModel {
+  /**
+   * Check the language model availability.
+   */
+  availability(): Promise<LanguageModelAvailability>;
+
+  /**
+   * Create a new language model session.
+   */
+  createSession(options?: { instructions?: string }): Promise<LanguageModelSession | undefined>;
+}
+
+/**
+ * Generative language model session.
+ */
+export interface LanguageModelSession {
+  /**
+   * Indicates a response is being generated.
+   */
+  isResponding(): Promise<boolean>;
+
+  /**
+   * Produces a response to a prompt.
+   */
+  respondTo(prompt: string, options?: LanguageModelGenerationOptions): Promise<LanguageModelResponse>;
+
+  /**
+   * Produces a response stream to a prompt.
+   *
+   * Each update delivers the latest snapshot of the content, not partial chunks.
+   */
+  streamResponseTo(
+    prompt: string,
+    options: LanguageModelGenerationOptions | LanguageModelStream,
+    stream?: LanguageModelStream,
+  ): void;
+}
+
+export type LanguageModelAvailability = {
+  isAvailable: boolean;
+  unavailableReason?: string;
+};
+
+export type LanguageModelGenerationOptions = {
+  sampling?: LanguageModelSampling;
+  temperature?: number;
+  maximumResponseTokens?: number;
+};
+
+export type LanguageModelSampling =
+  | { mode: 'greedy' }
+  | { mode: 'top-k' | 'top-p'; value: number; seed?: number };
 
 /**
  * Information of a file in the file system.
