@@ -51,7 +51,7 @@ export interface MarkEdit {
   /**
    * Retrieves a generative language model by name.
    */
-  languageModel(name: LanguageModelName): LanguageModel | undefined;
+  languageModel(name: LanguageModelName): LanguageModel;
 
   /**
    * CodeMirror modules used by MarkEdit.
@@ -287,7 +287,7 @@ export interface LanguageModel {
   /**
    * Create a new language model session.
    */
-  createSession(options?: { instructions?: string }): Promise<LanguageModelSession | undefined>;
+  createSession(options?: { instructions?: string }): Promise<LanguageModelSession>;
 }
 
 /**
