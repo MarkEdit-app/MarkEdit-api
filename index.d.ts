@@ -15,8 +15,10 @@ import type { MarkdownConfig } from '@lezer/markdown';
 import type * as cmView from '@codemirror/view';
 import type * as cmState from '@codemirror/state';
 import type * as cmLanguage from '@codemirror/language';
+import type * as cmLangMarkdown from '@codemirror/lang-markdown';
 import type * as cmCommands from '@codemirror/commands';
 import type * as cmSearch from '@codemirror/search';
+import type * as cmAutocomplete from '@codemirror/autocomplete';
 
 import type * as lezerCommon from '@lezer/common';
 import type * as lezerHighlight from '@lezer/highlight';
@@ -73,6 +75,11 @@ export interface MarkEdit {
     language: typeof cmLanguage;
 
     /**
+     * The `@codemirror/lang-markdown` module.
+     */
+    langMarkdown: typeof cmLangMarkdown;
+
+    /**
      * The `@codemirror/commands` module.
      */
     commands: typeof cmCommands;
@@ -81,6 +88,11 @@ export interface MarkEdit {
      * The `@codemirror/search` module.
      */
     search: typeof cmSearch;
+
+    /**
+     * The `@codemirror/autocomplete` module.
+     */
+    autocomplete: typeof cmAutocomplete;
   };
 
   /**

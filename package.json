@@ -1,13 +1,15 @@
 {
   "name": "markedit-api",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Type definitions for the latest MakrEdit API.",
   "main": "./index.cjs",
   "module": "./index.js",
   "types": "./index.d.ts",
   "license": "MIT",
   "peerDependencies": {
+    "@codemirror/autocomplete": "^6.0.0",
     "@codemirror/commands": "^6.0.0",
+    "@codemirror/lang-markdown": "^6.0.0",
     "@codemirror/language": "^6.0.0",
     "@codemirror/search": "^6.0.0",
     "@codemirror/state": "^6.0.0",
