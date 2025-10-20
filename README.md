@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.14.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.15.0"
   }
 }
 ```
@@ -72,6 +72,8 @@ interface MarkEdit {
   showTextBox(textBox?: TextBox): Promise<string | undefined>;
   // Present a save panel for saving the file.
   showSavePanel(options: SavePanelOptions): Promise<number>;
+  // Run a system service with input.
+  runService(name: string, input?: string): Promise<boolean>;
 }
 ```
 

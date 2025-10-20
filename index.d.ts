@@ -195,6 +195,14 @@ export interface MarkEdit {
    * @returns True if the file was successfully saved.
    */
   showSavePanel(options: SavePanelOptions): Promise<boolean>;
+
+  /**
+   * Run a [system service](https://support.apple.com/guide/mac-help/mchlp1012/mac) with input.
+   * @param name The name of the system service.
+   * @param input The input to pass to the service.
+   * @returns True if the service performed successfully.
+   */
+  runService(name: string, input?: string): Promise<boolean>;
 }
 
 /**
