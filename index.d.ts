@@ -127,10 +127,39 @@ export interface MarkEdit {
   onEditorReady(listener: (editorView: EditorView) => void): void;
 
   /**
-   * Get information of the current file.
-   * @returns The file information, or undefined for unsaved new drafts.
+   * Create a file in the file system.
+   * @param options The options, including path and content.
+   * @returns True if the file was successfully created.
    */
-  getFileInfo(): Promise<FileInfo | undefined>;
+  createFile(options: CreateFileOptions): Promise<boolean>;
+
+  /**
+   * Delete a file from the file system.
+   * @param path The file path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+   * @returns True if the file was successfully deleted.
+   */
+  deleteFile(path: string): Promise<boolean>;
+
+  /**
+   * List all files under a directory.
+   * @param path The directory path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+   * @returns All file names as a string array, or undefined if failed.
+   */
+  listFiles(path: string): Promise<string[] | undefined>;
+
+  /**
+   * Get the content of a file.
+   * @param path The file path. The current file is used as a fallback.
+   * @returns The file content as a string, or undefined if failed.
+   */
+  getFileContent(path?: string): Promise<string | undefined>;
+
+  /**
+   * Get the information of a file.
+   * @param path The file path. The current file is used as a fallback.
+   * @returns The file information, or undefined if not found.
+   */
+  getFileInfo(path?: string): Promise<FileInfo | undefined>;
 
   /**
    * Get all items from the native pasteboard.
@@ -359,6 +388,8 @@ export type FileInfo = {
   fileSize: number;
   creationDate: Date;
   modificationDate: Date;
+  parentPath: string;
+  isDirectory: boolean;
 };
 
 /**
@@ -483,6 +514,38 @@ export type TextBox = {
   placeholder?: string;
   defaultValue?: string;
 } | string;
+
+/**
+ * Represents options to create a file.
+ */
+export type CreateFileOptions = {
+  /**
+   * File path.
+   *
+   * It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+   */
+  path: string;
+
+  /**
+   * If set to true, a directory will be created instead.
+   */
+  isDirectory?: boolean;
+
+  /**
+   * If set to true, existing files with the same path will be overwritten.
+   */
+  overwrites?: boolean;
+
+  /**
+   * String representation of the file, if applicable.
+   */
+  string?: string;
+
+  /**
+   * Base64 representation of the file, if applicable.
+   */
+  data?: string;
+};
 
 /**
  * Represents options to show the save panel.

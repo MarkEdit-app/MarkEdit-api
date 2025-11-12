@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.15.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.16.0"
   }
 }
 ```
@@ -50,8 +50,16 @@ interface MarkEdit {
   lezer: { common, highlight, markdown, lr };
   // Get notified when the editor is initialized.
   onEditorReady(listener: (editorView: EditorView) => void): void;
-  // Get information of the current file.
-  getFileInfo(): Promise<FileInfo | undefined>;
+  // Create a file in the file system.
+  createFile(options: CreateFileOptions): Promise<boolean>;
+  // Delete a file from the file system.
+  deleteFile(path: string): Promise<boolean>;
+  // List all files under a directory.
+  listFiles(path: string): Promise<string[] | undefined>;
+  // Get the content of a file.
+  getFileContent(path?: string): Promise<string | undefined>;
+  // Get the information of a file.
+  getFileInfo(path?: string): Promise<FileInfo | undefined>;
   // Get all items from the native pasteboard.
   getPasteboardItems(): Promise<PasteboardItem[]>;
   // Get the string from the native pasteboard.

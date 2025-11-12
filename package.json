@@ -1,6 +1,6 @@
 {
   "name": "markedit-api",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "Type definitions for the latest MakrEdit API.",
   "main": "./index.cjs",
   "module": "./index.js",
