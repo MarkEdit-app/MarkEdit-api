@@ -56,6 +56,11 @@ export interface MarkEdit {
   languageModel(name: LanguageModelName): LanguageModel;
 
   /**
+   * Retrieves the system translation service.
+   */
+  translationService: TranslationService;
+
+  /**
    * CodeMirror modules used by MarkEdit.
    */
   codemirror: {
@@ -379,6 +384,22 @@ export type LanguageModelGenerationOptions = {
 export type LanguageModelSampling =
   | { mode: 'greedy' }
   | { mode: 'top-k' | 'top-p'; value: number; seed?: number };
+
+/**
+ * The system translation service.
+ */
+export interface TranslationService {
+  /**
+   * Translate the text with language pair.
+   *
+   * Use BCP-47 language tags, such as `en-US`, `zh-CN`.
+   */
+  translate(text: string, languages?: { from?: string; to?: string }): Promise<TranslationResponse>;
+}
+
+export type TranslationResponse =
+  | { succeeded: true; text: string }
+  | { succeeded: false; error: string };
 
 /**
  * Information of a file in the file system.
