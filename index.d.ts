@@ -167,6 +167,13 @@ export interface MarkEdit {
   getFileInfo(path?: string): Promise<FileInfo | undefined>;
 
   /**
+   * Get the path of a standard directory.
+   * @param type The directory type.
+   * @returns The directory path.
+   */
+  getDirectoryPath(type: DirectoryType): string;
+
+  /**
    * Get all items from the native pasteboard.
    * @returns The items from the native (general) pasteboard.
    */
@@ -567,6 +574,11 @@ export type CreateFileOptions = {
    */
   data?: string;
 };
+
+/**
+ * Represents standard directory types.
+ */
+export type DirectoryType = 'home' | 'documents' | 'library' | 'caches' | 'temporary';
 
 /**
  * Represents options to show the save panel.
