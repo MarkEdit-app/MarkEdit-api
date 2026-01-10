@@ -160,11 +160,11 @@ export interface MarkEdit {
   getFileContent(path?: string): Promise<string | undefined>;
 
   /**
-   * Get the data URI (base64 encoded) of a file.
+   * Get the binary data and type information of a file.
    * @param path The file path. The current file is used as a fallback.
-   * @returns The file data URI as a string, or undefined if failed.
+   * @returns The file object, or undefined if failed.
    */
-  getFileDataURI(path?: string): Promise<string | undefined>;
+  getFileObject(path?: string): Promise<FileObject | undefined>;
 
   /**
    * Get the information of a file.
@@ -414,6 +414,31 @@ export interface TranslationService {
 export type TranslationResponse =
   | { succeeded: true; text: string }
   | { succeeded: false; error: string };
+
+/**
+ * Represents a file object with data and type information.
+ */
+export type FileObject = {
+  /**
+   * Base64 representation of the file.
+   */
+  data: string;
+
+  /**
+   * Uniform Type Identifier (UTI) of the file.
+   */
+  typeIdentifier?: string;
+
+  /**
+   * MIME type of the file.
+   */
+  mimeType?: string;
+
+  /**
+   * File extension of the file.
+   */
+  filenameExtension?: string;
+}
 
 /**
  * Information of a file in the file system.

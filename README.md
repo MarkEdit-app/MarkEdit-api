@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.19.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.20.0"
   }
 }
 ```
@@ -60,8 +60,8 @@ interface MarkEdit {
   listFiles(path: string): Promise<string[] | undefined>;
   // Get the content of a file.
   getFileContent(path?: string): Promise<string | undefined>;
-  // Get the data URI (base64 encoded) of a file.
-  getFileDataURI(path?: string): Promise<string | undefined>;
+  // Get the binary data and type information of a file.
+  getFileObject(path?: string): Promise<FileObject | undefined>;
   // Get the information of a file.
   getFileInfo(path?: string): Promise<FileInfo | undefined>;
   // Get the path of a standard directory.
