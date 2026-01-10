@@ -160,6 +160,13 @@ export interface MarkEdit {
   getFileContent(path?: string): Promise<string | undefined>;
 
   /**
+   * Get the data URI (base64 encoded) of a file.
+   * @param path The file path. The current file is used as a fallback.
+   * @returns The file data URI as a string, or undefined if failed.
+   */
+  getFileDataURI(path?: string): Promise<string | undefined>;
+
+  /**
    * Get the information of a file.
    * @param path The file path. The current file is used as a fallback.
    * @returns The file information, or undefined if not found.
