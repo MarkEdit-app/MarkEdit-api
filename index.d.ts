@@ -132,6 +132,13 @@ export interface MarkEdit {
   onEditorReady(listener: (editorView: EditorView) => void): void;
 
   /**
+   * Open a file in the file system.
+   * @param path The file path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+   * @returns True if the file was successfully opened.
+   */
+  openFile(path: string): Promise<boolean>;
+
+  /**
    * Create a file in the file system.
    * @param options The options, including path and content.
    * @returns True if the file was successfully created.
