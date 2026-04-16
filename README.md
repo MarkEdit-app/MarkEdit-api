@@ -30,68 +30,7 @@ Import type declarations with:
 import { MarkEdit } from 'markedit-api';
 ```
 
-The `MarkEdit` object provides these interfaces:
-
-```ts
-interface MarkEdit {
-  // Configuration of the current editor.
-  editorConfig: Record<string, unknown>;
-  // User-defined settings loaded from the settings.json file.
-  userSettings: JSONObject;
-  // CodeMirror EditorView instance of the current editor.
-  editorView: EditorView;
-  // Convenient text editing interfaces.
-  editorAPI: TextEditable;
-  // Retrieves a generative language model by name.
-  languageModel(name: LanguageModelName): LanguageModel;
-  // Retrieves the system translation service.
-  translationService: TranslationService;
-  // CodeMirror modules used by MarkEdit.
-  codemirror: { view, state, language, langMarkdown, commands, search, autocomplete };
-  // Lezer modules used by MarkEdit.
-  lezer: { common, highlight, markdown, lr };
-  // Get notified when the editor is initialized.
-  onEditorReady(listener: (editorView: EditorView) => void): void;
-  // Open a file in the file system.
-  openFile(path: string): Promise<boolean>;
-  // Create a file in the file system.
-  createFile(options: CreateFileOptions): Promise<boolean>;
-  // Delete a file from the file system.
-  deleteFile(path: string): Promise<boolean>;
-  // List all files under a directory.
-  listFiles(path: string): Promise<string[] | undefined>;
-  // Get the content of a file.
-  getFileContent(path?: string): Promise<string | undefined>;
-  // Get the binary data and type information of a file.
-  getFileObject(path?: string): Promise<FileObject | undefined>;
-  // Get the information of a file.
-  getFileInfo(path?: string): Promise<FileInfo | undefined>;
-  // Get the path of a standard directory.
-  getDirectoryPath(type: DirectoryType): string;
-  // Get all items from the native pasteboard.
-  getPasteboardItems(): Promise<PasteboardItem[]>;
-  // Get the string from the native pasteboard.
-  getPasteboardString(): Promise<string | undefined>;
-  // Add an extension to MarkEdit.
-  addExtension(extension: Extension): void;
-  // Add a Markdown config to MarkEdit.
-  addMarkdownConfig(config: MarkdownConfig): void;
-  // Add a language to be highlighted (in code blocks) to MarkEdit.
-  addCodeLanguage(language: LanguageDescription): void;
-  // Add a menu item to the status bar.
-  addMainMenuItem(item: MenuItem | MenuItem[]): void;
-  // Present a contextual menu to receive user input.
-  showContextMenu(items: MenuItem[], location?: Point): void;
-  // Present an alert to receive user input.
-  showAlert(alert: Alert): Promise<number>;
-  // Present a text box to receive user input.
-  showTextBox(textBox?: TextBox): Promise<string | undefined>;
-  // Present a save panel for saving the file.
-  showSavePanel(options: SavePanelOptions): Promise<number>;
-  // Run a system service with input.
-  runService(name: string, input?: string): Promise<boolean>;
-}
-```
+Refer to the [index.d.ts](index.d.ts) file for all available interfaces and type definitions.
 
 Also, you can import and use [CodeMirror](https://codemirror.net/) and [Lezer](https://lezer.codemirror.net/) dependencies like this:
 
@@ -126,9 +65,9 @@ MarkEdit.addCodeLanguage(language);
 
 While you can certainly build user interfaces with JavaScript and CSS, leveraging native UI components might be a better option.
 
-To create UI entries for your features, you can use the [addMainMenuItem](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+addMainMenuItem&type=code) function, which adds an item to the "Extensions" submenu of the main menu, with keyboard shortcuts support.
+To create UI entries for your features, use `addMainMenuItem`, which adds an item to the "Extensions" submenu of the main menu, with keyboard shortcuts support.
 
-To request user input, try using [showContextMenu](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+showContextMenu&type=code), [showAlert](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+showAlert&type=code), and [showTextBox](https://github.com/search?q=repo%3AMarkEdit-app%2FMarkEdit-api+showTextBox&type=code).
+To request user input, try using `showContextMenu`, `showAlert`, and `showTextBox`.
 
 ## Building
 
@@ -189,15 +128,11 @@ Ensure the build system produces a single JavaScript file. If the build generate
 
 ## Using JavaScript
 
-If you just want to quickly prototype with JavaScript, you can directly access CodeMirror and MarkEdit interfaces through objects assigned to the `MarkEdit` object. For example:
+You can directly access CodeMirror and MarkEdit interfaces through objects assigned to the `MarkEdit` object. For example:
 
 ```js
 const keymap = MarkEdit.codemirror.view.keymap;
 const editorAPI = MarkEdit.editorAPI;
 ```
 
-----
-
-For complete examples, refer to [Example: Markdown Table Editor](https://github.com/MarkEdit-app/MarkEdit-mte), [Example: Text Highlight](https://github.com/MarkEdit-app/MarkEdit-highlight) and [Example: Vue Language Package](https://github.com/MarkEdit-app/MarkEdit-lang-vue).
-
-Also, [index.d.ts](./index.d.ts) is fully typed and documented, use it as the API reference.
+This is useful when you simply want to prototype something quickly.
