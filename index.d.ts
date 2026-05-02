@@ -132,6 +132,18 @@ export interface MarkEdit {
   onEditorReady(listener: (editorView: EditorView) => void): void;
 
   /**
+   * Save the current document to disk.
+   * @returns True if the document was successfully saved.
+   */
+  saveDocument(): Promise<boolean>;
+
+  /**
+   * Close the current document.
+   * @returns True if the document was successfully closed.
+   */
+  closeDocument(): Promise<boolean>;
+
+  /**
    * Open a file in the file system.
    * @param path The file path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
    * @returns True if the file was successfully opened.
