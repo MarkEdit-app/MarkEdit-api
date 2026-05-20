@@ -126,6 +126,11 @@ export interface MarkEdit {
   };
 
   /**
+   * Get information about the runtime.
+   */
+  getRuntimeInfo(): RuntimeInfo;
+
+  /**
    * Get notified when the editor is initialized.
    * @param listener The callback function with the initialized editor instance.
    */
@@ -271,6 +276,31 @@ export interface MarkEdit {
    */
   runService(name: string, input?: string): Promise<boolean>;
 }
+
+/**
+ * Information about the runtime.
+ */
+export type RuntimeInfo = {
+  /**
+   * Application version, such as `1.0`.
+   */
+  appVersion: string;
+
+  /**
+   * Application build number, such as `100`.
+   */
+  appBuild: string;
+
+  /**
+   * Operating system version, such as `15.0`.
+   */
+  osVersion: string;
+
+  /**
+   * WebKit version, such as `620.1.16`.
+   */
+  webkitVersion: string;
+};
 
 /**
  * Abstract editor to provide convenient text editing interfaces.
