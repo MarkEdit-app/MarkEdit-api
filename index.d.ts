@@ -131,6 +131,16 @@ export interface MarkEdit {
   getRuntimeInfo(): RuntimeInfo;
 
   /**
+   * Terminate the application. Unsaved changes will prompt for confirmation.
+   */
+  terminateApp(): void;
+
+  /**
+   * Relaunch the application. Unsaved changes will prompt for confirmation.
+   */
+  relaunchApp(): void;
+
+  /**
    * Get notified when the editor is initialized.
    * @param listener The callback function with the initialized editor instance.
    */
