@@ -180,6 +180,20 @@ export interface MarkEdit {
   deleteFile(path: string): Promise<boolean>;
 
   /**
+   * Move a file in the file system.
+   * @param options The source and destination paths. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for folder access.
+   * @returns True if the file was successfully moved.
+   */
+  moveFile(options: MoveFileOptions): Promise<boolean>;
+
+  /**
+   * Reveal a file in Finder.
+   * @param path The file path. The current file is used as a fallback.
+   * @returns True if the file was successfully revealed.
+   */
+  revealFile(path?: string): Promise<boolean>;
+
+  /**
    * List all files under a directory.
    * @param path The directory path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
    * @returns All file names as a string array, or undefined if failed.
@@ -664,6 +678,28 @@ export type CreateFileOptions = {
    * Base64 representation of the file, if applicable.
    */
   data?: string;
+};
+
+/**
+ * Represents options to move a file.
+ *
+ * Both paths must be ones that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+ */
+export type MoveFileOptions = {
+  /**
+   * Source file path.
+   */
+  source: string;
+
+  /**
+   * Destination file path.
+   */
+  destination: string;
+
+  /**
+   * If set to true, existing files at the destination will be overwritten.
+   */
+  overwrites?: boolean;
 };
 
 /**
