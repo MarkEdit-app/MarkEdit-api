@@ -705,7 +705,7 @@ export type MoveFileOptions = {
 /**
  * Represents standard directory types.
  */
-export type DirectoryType = 'home' | 'documents' | 'library' | 'caches' | 'temporary';
+export type DirectoryType = 'home' | 'documents' | 'library' | 'caches' | 'temporary' | 'sharedContainer';
 
 /**
  * Represents options to show the save panel.
