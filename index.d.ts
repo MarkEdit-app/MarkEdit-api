@@ -25,6 +25,13 @@ import type * as lezerHighlight from '@lezer/highlight';
 import type * as lezerMarkdown from '@lezer/markdown';
 import type * as lezerLr from '@lezer/lr';
 
+declare global {
+  /**
+   * File path of the current user script, or undefined if not applicable (e.g., in the DevTools console, which is not a user script context).
+   */
+  const __FILE_PATH__: string | undefined;
+}
+
 export const MarkEdit: Readonly<MarkEdit>;
 
 export interface MarkEdit {
@@ -128,7 +135,7 @@ export interface MarkEdit {
   /**
    * Get information about the runtime.
    */
-  getRuntimeInfo(): RuntimeInfo;
+  runtimeInfo(): RuntimeInfo;
 
   /**
    * Terminate the application. Unsaved changes will prompt for confirmation.

@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.24.0"
+    "markedit-api": "https://github.com/MarkEdit-app/MarkEdit-api#v0.25.0"
   }
 }
 ```
