@@ -148,6 +148,14 @@ export interface MarkEdit {
   relaunchApp(): void;
 
   /**
+   * Get notified when the app is ready.
+   *
+   * For a user script, this is ensured to be called only once during the app lifecycle.
+   * @param listener The callback function to be called when the app is ready.
+   */
+  onAppReady(listener: () => void): void;
+
+  /**
    * Get notified when the editor is initialized.
    * @param listener The callback function with the initialized editor instance.
    */
