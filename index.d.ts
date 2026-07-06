@@ -411,9 +411,9 @@ export interface TextEditable {
 /**
  * Unique identifier of a generative language model.
  *
- * The only supported model at this time is [Apple's Foundation Models](https://developer.apple.com/documentation/foundationmodels).
+ * `Private-Cloud-Compute` works in macOS 27.0 and later.
  */
-export type LanguageModelName = 'Apple-Foundation-Models';
+export type LanguageModelName = 'Apple-Foundation-Models' | 'Private-Cloud-Compute';
 
 /**
  * Response of a language model content generation.
