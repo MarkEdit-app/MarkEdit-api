@@ -265,13 +265,13 @@ export interface MarkEdit {
    * Add a Markdown config to MarkEdit.
    * @param config Markdown config.
    */
-  addMarkdownConfig(config: MarkdownConfig): void;
+  addMarkdownConfig(config: MarkdownConfig | MarkdownConfig[]): void;
 
   /**
    * Add a language to be highlighted (in code blocks) to MarkEdit.
    * @param language The language description.
    */
-  addCodeLanguage(language: LanguageDescription): void;
+  addCodeLanguage(language: LanguageDescription | LanguageDescription[]): void;
 
   /**
    * Add a menu item to the status bar.
