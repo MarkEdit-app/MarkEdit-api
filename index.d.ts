@@ -9,7 +9,7 @@
 
 import type { EditorView } from '@codemirror/view';
 import type { Extension } from '@codemirror/state';
-import type { LanguageDescription } from '@codemirror/language';
+import type { LanguageDescription, LanguageSupport } from '@codemirror/language';
 import type { MarkdownConfig } from '@lezer/markdown';
 
 import type * as cmView from '@codemirror/view';
@@ -272,6 +272,12 @@ export interface MarkEdit {
    * @param language The language description.
    */
   addCodeLanguage(language: LanguageDescription | LanguageDescription[]): void;
+
+  /**
+   * Override the built-in HTML language.
+   * @param provider A function that returns a LanguageSupport instance for HTML.
+   */
+  overrideHTMLLanguage(provider: (config?: { matchClosingTags?: boolean }) => LanguageSupport): void;
 
   /**
    * Add a menu item to the status bar.
