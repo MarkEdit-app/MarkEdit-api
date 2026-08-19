@@ -38,7 +38,7 @@ export interface MarkEdit {
   /**
    * Configuration of the current editor.
    */
-  editorConfig: Record<string, unknown>;
+  editorConfig: EditorConfig;
 
   /**
    * User-defined settings loaded from the [settings.json](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#advanced-settings) file.
@@ -160,6 +160,12 @@ export interface MarkEdit {
    * @param listener The callback function with the initialized editor instance.
    */
   onEditorReady(listener: (editorView: EditorView) => void): void;
+
+  /**
+   * Get notified when the editor configuration changes.
+   * @param listener The callback function with the changed key and new value.
+   */
+  onEditorConfigChange(listener: (...change: EditorConfigChange) => void): void;
 
   /**
    * Save the current document to disk.
@@ -321,6 +327,31 @@ export interface MarkEdit {
    */
   runService(name: string, input?: string): Promise<boolean>;
 }
+
+export interface EditorConfig {
+  theme: string;
+  fontFace: { family: string; weight?: string; style?: string; };
+  fontSize: number;
+  showLineNumbers: boolean;
+  showActiveLineIndicator: boolean;
+  invisiblesBehavior: 'never' | 'selection' | 'trailing' | 'always';
+  readOnlyMode: boolean;
+  typewriterMode: boolean;
+  focusMode: boolean;
+  lineWrapping: boolean;
+  lineHeight: number;
+  suggestWhileTyping: boolean;
+  standardDirectories: { [key: string]: string };
+  runtimeInfo?: RuntimeInfo;
+  defaultLineBreak?: string;
+  tabKeyBehavior?: number;
+  indentUnit?: string;
+  smartQuotesEnabled: boolean;
+}
+
+export type EditorConfigChange = {
+  [Key in keyof EditorConfig]-?: [key: Key, value: EditorConfig[Key]];
+}[keyof EditorConfig];
 
 /**
  * Information about the runtime.
