@@ -515,6 +515,10 @@ export type LanguageModelAvailability = {
 };
 
 export type LanguageModelGenerationOptions = {
+  /**
+   * In macOS 27.0 and later, provide attachments to the language model.
+   */
+  attachments?: FileObject[];
   sampling?: LanguageModelSampling;
   temperature?: number;
   maximumResponseTokens?: number;
