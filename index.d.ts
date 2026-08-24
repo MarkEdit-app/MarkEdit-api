@@ -250,6 +250,33 @@ export interface MarkEdit {
   getDirectoryPath(type: DirectoryType): string;
 
   /**
+   * Get all available versions of the current document, sorted newest to oldest.
+   * @returns The list of file versions, or an empty array if no versions are available.
+   */
+  getFileVersions(): Promise<FileVersion[]>;
+
+  /**
+   * Get the text content of a specific file version.
+   * @param id The unique identifier of the version.
+   * @returns The text content, or undefined if the version is not found.
+   */
+  getFileVersionContent(id: string): Promise<string | undefined>;
+
+  /**
+   * Restore the document to a specific file version.
+   * @param id The unique identifier of the version.
+   * @returns True if the version was successfully restored.
+   */
+  restoreFileVersion(id: string): Promise<boolean>;
+
+  /**
+   * Delete specific file versions.
+   * @param ids The unique identifiers of the versions to delete.
+   * @returns True if the versions were successfully deleted.
+   */
+  deleteFileVersions(ids: string[]): Promise<boolean>;
+
+  /**
    * Get all items from the native pasteboard.
    * @returns The items from the native (general) pasteboard.
    */
@@ -781,6 +808,21 @@ export type SavePanelOptions = {
    * Default file name.
    */
   fileName?: string;
+};
+
+/**
+ * Represents a historical version of the current document.
+ */
+export type FileVersion = {
+  /**
+   * Unique identifier for this version, valid for the current session.
+   */
+  id: string;
+
+  /**
+   * Modification date of this version.
+   */
+  modificationDate: Date;
 };
 
 /**
