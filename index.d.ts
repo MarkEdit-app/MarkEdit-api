@@ -270,11 +270,11 @@ export interface MarkEdit {
   restoreFileVersion(id: string): Promise<boolean>;
 
   /**
-   * Delete specific file versions.
+   * Delete specific file versions, this works for local versions only.
    * @param ids The unique identifiers of the versions to delete.
    * @returns True if the versions were successfully deleted.
    */
-  deleteFileVersions(ids: string[]): Promise<boolean>;
+  deleteLocalFileVersions(ids: string[]): Promise<boolean>;
 
   /**
    * Get all items from the native pasteboard.
@@ -823,6 +823,11 @@ export type FileVersion = {
    * Modification date of this version.
    */
   modificationDate: Date;
+
+  /**
+   * Whether this version is stored locally or in iCloud.
+   */
+  isLocal: boolean;
 };
 
 /**
