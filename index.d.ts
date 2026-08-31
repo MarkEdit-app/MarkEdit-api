@@ -148,6 +148,11 @@ export interface MarkEdit {
   relaunchApp(): void;
 
   /**
+   * Play the system beep.
+   */
+  playSystemBeep(): void;
+
+  /**
    * Get notified when the app is ready.
    *
    * For a user script, this is ensured to be called only once during the app lifecycle.
