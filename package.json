@@ -1,6 +1,6 @@
 {
   "name": "markedit-api",
-  "version": "0.34.0",
+  "version": "0.35.0",
   "description": "Type definitions for the latest MarkEdit API.",
   "type": "module",
   "main": "./index.cjs",

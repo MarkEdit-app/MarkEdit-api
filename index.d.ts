@@ -170,7 +170,7 @@ export interface MarkEdit {
    * Get notified when the editor configuration changes.
    * @param listener The callback function with the changed key and new value.
    */
-  onEditorConfigChange(listener: (...change: EditorConfigChange) => void): void;
+  onEditorConfigChange(listener: (key: EditorConfigChange[0], value: EditorConfigChange[1]) => void): void;
 
   /**
    * Save the current document to disk.
