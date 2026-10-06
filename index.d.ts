@@ -58,6 +58,11 @@ export interface MarkEdit {
   editorAPI: TextEditable;
 
   /**
+   * Keychain-backed secret storage for the current script.
+   */
+  secretStorage: SecretStorage;
+
+  /**
    * Retrieves a generative language model by name.
    */
   languageModel(name: LanguageModelName): LanguageModel;
@@ -488,6 +493,41 @@ export interface TextEditable {
    * Redo a change.
    */
   redo(): void;
+}
+
+/**
+ * Secret storage in macOS Keychain, each extension has its own store.
+ *
+ * Reading a secret requires MarkEdit confirmation to provide context to the user.
+ * macOS may separately require authentication for any operation.
+ *
+ * Operations reject if the user denies or cancels access, no script context is available, or storage fails.
+ */
+export interface SecretStorage {
+  /**
+   * Check whether a secret exists without retrieving its value or showing MarkEdit confirmation.
+   * @returns True if the secret exists, or false only if it does not exist.
+   */
+  has(key: string): Promise<boolean>;
+
+  /**
+   * Get a secret after native confirmation showing its key, script identity, and script path.
+   *
+   * Each call requires approval before accessing Keychain.
+   * @returns The secret, or undefined only if it does not exist.
+   */
+  get(key: string): Promise<string | undefined>;
+
+  /**
+   * Store or replace a secret.
+   */
+  set(key: string, value: string): Promise<void>;
+
+  /**
+   * Delete a secret.
+   * @returns True if deleted, or false only if the secret did not exist.
+   */
+  delete(key: string): Promise<boolean>;
 }
 
 /**
