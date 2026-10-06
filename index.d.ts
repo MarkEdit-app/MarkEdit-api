@@ -185,6 +185,12 @@ export interface MarkEdit {
   closeDocument(): Promise<boolean>;
 
   /**
+   * Get the paths of recently opened documents, sorted most recent first.
+   * @returns The file-system paths, or an empty array if there are no recent documents.
+   */
+  recentDocumentPaths(): Promise<string[]>;
+
+  /**
    * Open a file in the file system.
    * @param path The file path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
    * @returns True if the file was successfully opened.
