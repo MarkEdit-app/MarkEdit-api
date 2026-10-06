@@ -352,6 +352,13 @@ export interface MarkEdit {
   showSavePanel(options: SavePanelOptions): Promise<boolean>;
 
   /**
+   * Present the print panel for content of a supported type.
+   * @param options The content to print and optionally a job title.
+   * @returns True if the print operation was accepted.
+   */
+  showPrintPanel(options: PrintPanelOptions): Promise<boolean>;
+
+  /**
    * Run a [system service](https://support.apple.com/guide/mac-help/mchlp1012/mac) with input.
    * @param name The name of the system service.
    * @param input The input to pass to the service.
@@ -813,6 +820,26 @@ export type SavePanelOptions = {
    * Default file name.
    */
   fileName?: string;
+};
+
+/**
+ * Represents options to show the print panel for content of a supported type.
+ */
+export type PrintPanelOptions = {
+  /**
+   * Content type to print. Currently only PDF is supported.
+   */
+  type: 'pdf';
+
+  /**
+   * Base64 representation of the content to print. For 'pdf', this is PDF data.
+   */
+  data: string;
+
+  /**
+   * Job title shown in the print panel and print queue.
+   */
+  title?: string;
 };
 
 /**
