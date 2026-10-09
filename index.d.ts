@@ -364,6 +364,13 @@ export interface MarkEdit {
   showTextBox(textBox?: TextBox): Promise<string | undefined>;
 
   /**
+   * Present an open panel for selecting files or folders without opening them.
+   * @param options The panel information and selection behavior.
+   * @returns A nonempty array of absolute file paths, or undefined if cancelled or failed.
+   */
+  showOpenPanel(options?: OpenPanelOptions): Promise<string[] | undefined>;
+
+  /**
    * Present a save panel for saving the file.
    * @param options The panel information, including the data and optionally a default file name.
    * @returns True if the file was successfully saved.
@@ -851,6 +858,36 @@ export type MoveFileOptions = {
  * Represents standard directory types.
  */
 export type DirectoryType = 'home' | 'documents' | 'library' | 'caches' | 'temporary' | 'sharedContainer';
+
+/**
+ * Represents options to show the open panel.
+ */
+export type OpenPanelOptions = {
+  /**
+   * Panel title. Uses the system default if omitted.
+   */
+  title?: string;
+
+  /**
+   * Instructions displayed in the panel.
+   */
+  message?: string;
+
+  /**
+   * Confirmation button label. Uses the system default if omitted.
+   */
+  prompt?: string;
+
+  /**
+   * Types of items that can be selected. Defaults to 'files'.
+   */
+  selectionType?: 'files' | 'directories' | 'both';
+
+  /**
+   * Allow selecting multiple items. Defaults to false.
+   */
+  allowsMultipleSelection?: boolean;
+};
 
 /**
  * Represents options to show the save panel.
