@@ -178,6 +178,14 @@ export interface MarkEdit {
   onEditorConfigChange(listener: (key: EditorConfigChange[0], value: EditorConfigChange[1]) => void): void;
 
   /**
+   * Open a plain text file in MarkEdit, or focus it if already open.
+   * @param path The file path.
+   * @param options Where to open the document.
+   * @returns True on success; false on failure, without external fallback.
+   */
+  openDocument(path: string, options?: { target?: 'automatic' | 'window' | 'tab' }): Promise<boolean>;
+
+  /**
    * Save the current document to disk.
    * @returns True if the document was successfully saved.
    */
