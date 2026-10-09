@@ -197,7 +197,7 @@ export interface MarkEdit {
 
   /**
    * Open a file in the file system.
-   * @param path The file path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+   * @param path The file path.
    * @returns True if the file was successfully opened.
    */
   openFile(path: string): Promise<boolean>;
@@ -211,14 +211,14 @@ export interface MarkEdit {
 
   /**
    * Delete a file from the file system.
-   * @param path The file path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+   * @param path The file path.
    * @returns True if the file was successfully deleted.
    */
   deleteFile(path: string): Promise<boolean>;
 
   /**
    * Move a file in the file system.
-   * @param options The source and destination paths. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for folder access.
+   * @param options The source and destination paths.
    * @returns True if the file was successfully moved.
    */
   moveFile(options: MoveFileOptions): Promise<boolean>;
@@ -232,7 +232,7 @@ export interface MarkEdit {
 
   /**
    * List all files under a directory.
-   * @param path The directory path. It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
+   * @param path The directory path.
    * @returns All file names as a string array, or undefined if failed.
    */
   listFiles(path: string): Promise<string[] | undefined>;
@@ -795,8 +795,6 @@ export type TextBox = {
 export type CreateFileOptions = {
   /**
    * File path.
-   *
-   * It must be one that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
    */
   path: string;
 
@@ -823,8 +821,6 @@ export type CreateFileOptions = {
 
 /**
  * Represents options to move a file.
- *
- * Both paths must be ones that the app can access. See the [wiki](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#grant-folder-access) for more details.
  */
 export type MoveFileOptions = {
   /**
