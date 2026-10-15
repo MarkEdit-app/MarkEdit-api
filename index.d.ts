@@ -346,8 +346,9 @@ export interface MarkEdit {
    * Present a contextual menu to receive user input.
    * @param items The items in the menu.
    * @param location The location to show the menu, with the default value set to the caret position.
+   * @param options The menu's presentation behavior.
    */
-  showContextMenu(items: MenuItem[], location?: Point): void;
+  showContextMenu(items: MenuItem[], location?: Point, options?: ContextMenuOptions): void;
 
   /**
    * Present an alert to receive user input.
@@ -769,6 +770,19 @@ export type MenuItemState = {
 export type Point = {
   x: number;
   y: number;
+};
+
+/**
+ * Represents options to present a contextual menu.
+ */
+export type ContextMenuOptions = {
+  /**
+   * Index of the item to highlight when the menu opens (zero-based).
+   *
+   * If omitted, invalid, or pointing to a separator or disabled item,
+   * the menu opens without an initial highlight.
+   */
+  highlightedIndex?: number;
 };
 
 /**
