@@ -343,6 +343,13 @@ export interface MarkEdit {
   addMainMenuItem(item: MenuItem | MenuItem[]): void;
 
   /**
+   * Register toolbar items at script load.
+   * Each ID is inserted automatically once; subsequent removal and placement are preserved.
+   * Removed items remain available in Customize Toolbar.
+   */
+  addToolbarItem(item: ToolbarItem | ToolbarItem[]): void;
+
+  /**
    * Present a contextual menu to receive user input.
    * @param items The items in the menu.
    * @param location The location to show the menu, with the default value set to the caret position.
@@ -748,6 +755,64 @@ export type MenuItem = {
    * Child items to build a submenu.
    */
   children?: MenuItem[];
+};
+
+/**
+ * A single-selection segmented toolbar control.
+ */
+export type ToolbarItem = {
+  /**
+   * Stable, extension-namespaced ID, unique within each editor. Do not localize.
+   * Duplicate registrations are rejected.
+   */
+  id: string;
+
+  /**
+   * Localized toolbar label.
+   */
+  title: string;
+
+  /**
+   * Group icon: SF Symbol name or base64 image data.
+   */
+  icon: string;
+
+  /**
+   * Single-selection segmented presentation.
+   */
+  type: 'segmented';
+
+  /**
+   * Nonempty, ordered list of mutually exclusive choices.
+   */
+  segments: ToolbarSegment[];
+};
+
+/**
+ * A choice in a segmented toolbar control.
+ */
+export type ToolbarSegment = {
+  /**
+   * Localized label for tooltips, overflow, and accessibility.
+   */
+  title: string;
+
+  /**
+   * Segment icon: SF Symbol name or base64 image data.
+   */
+  icon: string;
+
+  /**
+   * Update selection synchronously; async work is not awaited.
+   */
+  action: () => void;
+
+  /**
+   * Queried repeatedly; keep synchronous, inexpensive, and side-effect-free.
+   * At most one segment may be selected; no selection is allowed.
+   * isEnabled defaults to true.
+   */
+  state: () => { isSelected: boolean; isEnabled?: boolean };
 };
 
 /**

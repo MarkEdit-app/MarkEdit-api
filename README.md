@@ -19,7 +19,7 @@ Add `markedit-api` to your (TypeScript) project's devDependencies:
 ```json
 {
   "devDependencies": {
-    "markedit-api": "0.39.0"
+    "markedit-api": "0.40.0"
   }
 }
 ```
