@@ -350,6 +350,13 @@ export interface MarkEdit {
   addToolbarItem(item: ToolbarItem | ToolbarItem[]): void;
 
   /**
+   * Refresh an item's selected/enabled state in the current editor.
+   * Call for changes outside toolbar actions or after async work.
+   * Unknown IDs are logged and ignored.
+   */
+  invalidateToolbarItem(id: string): void;
+
+  /**
    * Present a contextual menu to receive user input.
    * @param items The items in the menu.
    * @param location The location to show the menu, with the default value set to the caret position.
@@ -803,12 +810,13 @@ export type ToolbarSegment = {
   icon: string;
 
   /**
-   * Update selection synchronously; async work is not awaited.
+   * State refreshes automatically after the action, including on failure.
+   * Async work is not awaited; invalidate explicitly after later state changes.
    */
   action: () => void;
 
   /**
-   * Queried repeatedly; keep synchronous, inexpensive, and side-effect-free.
+   * Synchronous, side-effect-free state getter.
    * At most one segment may be selected; no selection is allowed.
    * isEnabled defaults to true.
    */
