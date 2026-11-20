@@ -337,20 +337,20 @@ export interface MarkEdit {
   overrideHTMLLanguage(provider: (config?: { matchClosingTags?: boolean }) => LanguageSupport): void;
 
   /**
-   * Add a menu item to the status bar.
+   * Declare a main-menu item once, synchronously when your script runs.
    * @param item The menu item to add, which will be placed under the "Extensions" submenu. It can either perform an action or contain a submenu.
    */
   addMainMenuItem(item: MenuItem | MenuItem[]): void;
 
   /**
-   * Register toolbar items at script load.
-   * Each ID is inserted automatically once; subsequent removal and placement are preserved.
-   * Removed items remain available in Customize Toolbar.
+   * Register a toolbar item once, synchronously when your script runs.
+   * @param item The toolbar item to register, or an array of items.
    */
   addToolbarItem(item: ToolbarItem | ToolbarItem[]): void;
 
   /**
-   * Refresh an item's selected/enabled state in the current editor.
+   * Refresh state for an item and its segments or menu entries in the current editor.
+   * Button and menu state getters can also override the item's title and icon.
    * Call for changes outside toolbar actions or after async work.
    * Unknown IDs are logged and ignored.
    */
@@ -765,7 +765,11 @@ export type MenuItem = {
 };
 
 /**
- * A single-selection segmented toolbar control.
+ * A native toolbar control.
+ * Declare each item once, synchronously during initial script execution.
+ * The item set and structure stay fixed; use state getters for runtime changes.
+ * State refreshes after actions, including menu actions and failures.
+ * Async actions are not awaited; invalidate explicitly after later state changes.
  */
 export type ToolbarItem = {
   /**
@@ -775,24 +779,86 @@ export type ToolbarItem = {
   id: string;
 
   /**
-   * Localized toolbar label.
+   * Localized default toolbar label.
    */
   title: string;
 
   /**
-   * Group icon: SF Symbol name or base64 image data.
+   * Default toolbar icon: SF Symbol name or base64 image data.
    */
   icon: string;
 
   /**
-   * Single-selection segmented presentation.
+   * Placement when this ID is first introduced. Defaults to 'customization'.
+   * 'toolbar' adds the item at the leading end; 'customization' only offers it in Customize Toolbar.
+   * Later changes to this option do not affect placement.
    */
-  type: 'segmented';
+  initialPlacement?: 'toolbar' | 'customization';
+} & (
+  | {
+      /**
+       * Button that invokes an action.
+       */
+      type: 'button';
+
+      /**
+       * Action invoked when the button is pressed.
+       */
+      action: () => void;
+
+      /**
+       * Synchronous, side-effect-free state getter.
+       */
+      state?: () => ToolbarItemState;
+    }
+  | {
+      /**
+       * Button that opens a menu.
+       */
+      type: 'menu';
+
+      /**
+       * Menu entries, including separators and nested submenus.
+       */
+      children: MenuItem[];
+
+      /**
+       * Synchronous, side-effect-free state getter.
+       */
+      state?: () => ToolbarItemState;
+    }
+  | {
+      /**
+       * Single-selection segmented presentation.
+       */
+      type: 'segmented';
+
+      /**
+       * Nonempty, ordered list of mutually exclusive choices.
+       */
+      segments: ToolbarSegment[];
+    }
+);
+
+/**
+ * State of a toolbar button or menu.
+ */
+export type ToolbarItemState = {
+  /**
+   * Whether enabled; defaults to true.
+   */
+  isEnabled?: boolean;
 
   /**
-   * Nonempty, ordered list of mutually exclusive choices.
+   * Localized title override. Omit to restore the registered title.
    */
-  segments: ToolbarSegment[];
+  title?: string;
+
+  /**
+   * Icon override: SF Symbol name or base64 image data.
+   * Omit to restore the registered icon.
+   */
+  icon?: string;
 };
 
 /**
