@@ -349,7 +349,7 @@ export interface MarkEdit {
   addToolbarItem(item: ToolbarItem | ToolbarItem[]): void;
 
   /**
-   * Refresh state for an item and its segments or menu entries in the current editor.
+   * Refresh state for an item and its group buttons, segments, or menu entries in the current editor.
    * Button and menu state getters can also override the item's title and icon.
    * Call for changes outside toolbar actions or after async work.
    * Unknown IDs are logged and ignored.
@@ -765,7 +765,7 @@ export type MenuItem = {
 };
 
 /**
- * A native toolbar control.
+ * A native toolbar item.
  * Declare each item once, synchronously during initial script execution.
  * The item set and structure stay fixed; use state getters for runtime changes.
  * State refreshes after actions, including menu actions and failures.
@@ -779,6 +779,20 @@ export type ToolbarItem = {
   id: string;
 
   /**
+   * Placement when this ID is first introduced. Defaults to 'customization'.
+   * 'toolbar' adds the item at the leading end; 'customization' only offers it in Customize Toolbar.
+   * Later changes to this option do not affect placement.
+   */
+  initialPlacement?: 'toolbar' | 'customization';
+} & (ToolbarButton | ToolbarMenu | ToolbarSegmented | ToolbarGroup);
+
+/**
+ * A toolbar button that invokes an action, either standalone or within a group.
+ */
+export type ToolbarButton = {
+  type: 'button';
+
+  /**
    * Localized default toolbar label.
    */
   title: string;
@@ -789,59 +803,91 @@ export type ToolbarItem = {
   icon: string;
 
   /**
-   * Placement when this ID is first introduced. Defaults to 'customization'.
-   * 'toolbar' adds the item at the leading end; 'customization' only offers it in Customize Toolbar.
-   * Later changes to this option do not affect placement.
+   * Action invoked when the button is pressed.
    */
-  initialPlacement?: 'toolbar' | 'customization';
-} & (
-  | {
-      /**
-       * Button that invokes an action.
-       */
-      type: 'button';
+  action: () => void;
 
-      /**
-       * Action invoked when the button is pressed.
-       */
-      action: () => void;
-
-      /**
-       * Synchronous, side-effect-free state getter.
-       */
-      state?: () => ToolbarItemState;
-    }
-  | {
-      /**
-       * Button that opens a menu.
-       */
-      type: 'menu';
-
-      /**
-       * Menu entries, including separators and nested submenus.
-       */
-      children: MenuItem[];
-
-      /**
-       * Synchronous, side-effect-free state getter.
-       */
-      state?: () => ToolbarItemState;
-    }
-  | {
-      /**
-       * Single-selection segmented presentation.
-       */
-      type: 'segmented';
-
-      /**
-       * Nonempty, ordered list of mutually exclusive choices.
-       */
-      segments: ToolbarSegment[];
-    }
-);
+  /**
+   * Synchronous, side-effect-free state getter.
+   */
+  state?: () => ToolbarItemState;
+};
 
 /**
- * State of a toolbar button or menu.
+ * A toolbar button that opens a menu.
+ */
+export type ToolbarMenu = {
+  type: 'menu';
+
+  /**
+   * Localized default toolbar label.
+   */
+  title: string;
+
+  /**
+   * Default toolbar icon: SF Symbol name or base64 image data.
+   */
+  icon: string;
+
+  /**
+   * Menu entries, including separators and nested submenus.
+   */
+  children: MenuItem[];
+
+  /**
+   * Synchronous, side-effect-free state getter.
+   */
+  state?: () => ToolbarItemState;
+};
+
+/**
+ * A single-selection segmented toolbar control.
+ */
+export type ToolbarSegmented = {
+  type: 'segmented';
+
+  /**
+   * Localized toolbar label.
+   */
+  title: string;
+
+  /**
+   * Group icon: SF Symbol name or base64 image data.
+   */
+  icon: string;
+
+  /**
+   * Nonempty, ordered list of mutually exclusive choices.
+   */
+  segments: ToolbarSegment[];
+};
+
+/**
+ * Action buttons added, moved, and removed as one toolbar item.
+ * Buttons act independently, without mutually exclusive selection.
+ * Use the group's ID to invalidate state for all its buttons.
+ */
+export type ToolbarGroup = {
+  type: 'group';
+
+  /**
+   * Localized label for the group.
+   */
+  title: string;
+
+  /**
+   * Group icon: SF Symbol name or base64 image data.
+   */
+  icon: string;
+
+  /**
+   * Nonempty, ordered list of action buttons. Menus and nested groups are not supported.
+   */
+  items: ToolbarButton[];
+};
+
+/**
+ * State of a standalone or grouped toolbar button, or a menu.
  */
 export type ToolbarItemState = {
   /**
