@@ -109,7 +109,7 @@ rollupOptions: {
   ],
   output: {
     globals: {
-      'markedit-api': 'MarkEdit',
+      'markedit-api': '({ MarkEdit })',
       '@codemirror/view': 'MarkEdit.codemirror.view',
       '@codemirror/state': 'MarkEdit.codemirror.state',
     },
